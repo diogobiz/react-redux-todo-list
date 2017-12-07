@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Item from './Item';
+import Hr from './Hr';
 import '../style.css';
 
 
@@ -13,6 +14,7 @@ class List extends Component {
             return (
               <li key={index}>
                 <Item onRemove={this.props.onRemove} item={item} />
+                {this.props.list.length > 1 && <Hr />}
               </li>
             )
           })
