@@ -1,0 +1,36 @@
+/* PADDINGS */
+.p-20 {
+  padding: 20px;
+}
+
+/* MAGINS */
+.m-r-20 {
+  margin-right: 20px;
+}
+
+.no-resize {
+  resize: none;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* FLEX */
+.display-flex {
+  display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.note-list {
+  list-style: none;
+}
+
+.remove-note {
+  font-size: 25px;
+  opacity: .5;
+  cursor: pointer;  
+}
