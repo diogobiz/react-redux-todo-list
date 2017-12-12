@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
-import FormContainer from './FormContainer';
-import ListContainer from './ListContainer';
-import * as colors from '../constants/colors.js';
+import FormContainer from '../containers/FormContainer';
+import ListContainer from '../containers/ListContainer';
+import Scrollbar from './Scrollbar';
+import DrawerHeader from './DrawerHeader';
+import { indigo500 } from 'material-ui/styles/colors';
 import Drawer from 'material-ui/Drawer';
 
 const muiTheme = getMuiTheme({
   appBar: {
     height: 50,
-    color: colors.indigo500    
+    color: indigo500    
   },
 });
 
-class LayoutContainer extends Component {
+class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = {open: false};
@@ -32,16 +34,19 @@ class LayoutContainer extends Component {
     }    
     return (
       <MuiThemeProvider muiTheme={muiTheme}>    
-        <div>        
+        <div style={{height: '100%'}}>        
           <AppBar title="My App" onLeftIconButtonClick={this.handleToggle} />
           <Drawer
             docked={false}
             width={260}
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})}>
+            <Scrollbar>
+              <DrawerHeader />
+            </Scrollbar>
           </Drawer>          
 
-          <div className="display-flex" style={{height: '100%'}}>
+          <div className="display-flex" style={{height: 'calc(100% - 50px)', overflow: 'auto'}}>
             <div style={formStyle}>
               <FormContainer />
             </div>
@@ -55,4 +60,4 @@ class LayoutContainer extends Component {
   }
 }
 
-export default LayoutContainer;
+export default Layout;

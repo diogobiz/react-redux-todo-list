@@ -1,3 +1,7 @@
+html {
+  overflow: hidden;
+}
+
 /* PADDINGS */
 .p-20 {
   padding: 20px;
