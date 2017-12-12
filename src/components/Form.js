@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import '../style.css';
 
 class Form extends Component {
   onSubmit(e) {
-    this.props.handleSubmit(e);
+    this.props.handleSubmit(e, null, this.props.initialValues);
     this.props.reset()
   }
   render() {
     return (
-      <form className="p-20" onSubmit={this.onSubmit.bind(this)}>
+      <form className="p-20" onSubmit={(e) => this.onSubmit(e)}>
         <div className="form-group">
           <label>Title</label>
           <div>
@@ -50,4 +51,14 @@ class Form extends Component {
   }
 }
 
-export default reduxForm({form: 'formNote'})(Form)
+const mapStateToProps = (state) => {
+  return {
+    initialValues: state.notes.item
+  }
+}
+
+export default connect(mapStateToProps)(reduxForm({
+  form: 'formNote',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true
+})(Form))

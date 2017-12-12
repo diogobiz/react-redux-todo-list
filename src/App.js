@@ -16,7 +16,6 @@ class App extends Component {
       width: '50%',
       marginTop: '23px'
     }
-    // console.log(this)
     return (
       <Provider store={store}>
         <div className="display-flex" style={{height: '100%'}}>

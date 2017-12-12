@@ -8,6 +8,10 @@
   margin-right: 20px;
 }
 
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
 .no-resize {
   resize: none;
 }
@@ -33,4 +37,9 @@
   font-size: 25px;
   opacity: .5;
   cursor: pointer;  
+}
+
+.editing {
+  pointer-events: none;
+  opacity: .5;
 }
