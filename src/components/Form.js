@@ -6,6 +6,7 @@ import { required, minLength5, alphaNumeric } from '../constants/validators.js';
 
 const inputField = ({
   input,
+  autocomplete,
   placeholder,
   type,
   className,
@@ -13,7 +14,7 @@ const inputField = ({
 }) => {
   return (
     <div>
-      <input {...input} placeholder={placeholder} type={type} className={className}/><br />
+      <input {...input} autoComplete={autocomplete} placeholder={placeholder} type={type} className={className}/><br />
       {touched &&
         ((error && <span className="input-error"><b>{error}</b></span>) ||
           (warning && <span className="input-warning"><b>{warning}</b></span>))}
@@ -52,9 +53,9 @@ class Form extends Component {
             <Field
               className="form-control"
               name="title"
-              autoComplete="off"
               component={inputField}
               type="text"
+              autocomplete="off"
               validate={[required, minLength5]}
               warn={alphaNumeric}
               placeholder="Title.."
@@ -77,7 +78,7 @@ class Form extends Component {
         </div>
         <div>
           <button type="submit" className="btn btn-primary m-r-20" disabled={this.props.pristine || this.props.submitting}>
-            Submit
+            Save
           </button>
           <button type="button" className="btn btn-default" disabled={this.props.pristine || this.props.submitting} onClick={this.props.reset}>
             Clear
