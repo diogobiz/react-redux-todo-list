@@ -2,6 +2,41 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import '../style.css';
+import { required, minLength5, alphaNumeric } from '../constants/validators.js';
+
+const inputField = ({
+  input,
+  placeholder,
+  type,
+  className,
+  meta: { touched, error, warning }
+}) => {
+  return (
+    <div>
+      <input {...input} placeholder={placeholder} type={type} className={className}/><br />
+      {touched &&
+        ((error && <span className="input-error"><b>{error}</b></span>) ||
+          (warning && <span className="input-warning"><b>{warning}</b></span>))}
+    </div>
+  )
+}
+
+const textareaField = ({
+  input,
+  placeholder,
+  className,
+  rows,
+  meta: { touched, error, warning }
+}) => {
+  return (
+    <div>
+      <textarea {...input} placeholder={placeholder} rows={rows} className={className}></textarea><br />
+      {touched &&
+        ((error && <span className="input-error"><b>{error}</b></span>) ||
+          (warning && <span className="input-warning"><b>{warning}</b></span>))}
+    </div>
+  )
+}
 
 class Form extends Component {
   onSubmit(e) {
@@ -18,9 +53,10 @@ class Form extends Component {
               className="form-control"
               name="title"
               autoComplete="off"
-              component="input"
+              component={inputField}
               type="text"
-              required
+              validate={[required, minLength5]}
+              warn={alphaNumeric}
               placeholder="Title.."
             />
           </div>
@@ -31,9 +67,10 @@ class Form extends Component {
             <Field
               className="form-control no-resize"
               name="description"
-              component="textarea"
+              component={textareaField}
               rows="4"
-              required
+              validate={[required, minLength5]}
+              warn={alphaNumeric}              
               placeholder="Description..."
             />
           </div>

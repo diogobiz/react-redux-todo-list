@@ -43,3 +43,11 @@
   pointer-events: none;
   opacity: .5;
 }
+
+.input-error {
+  color: #bf2828;
+}
+
+.input-warning {
+  color: #d2d22c;
+}
