@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import Layout from './components/Layout';
+import LayoutContainer from './containers/LayoutContainer';
 import configStore from './reducers'
 
 const store = configStore();
@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Layout />
+        <LayoutContainer />
       </Provider>
     );
   }

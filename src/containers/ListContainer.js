@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { removeNote, editNote } from '../actions'
+import { connect } from 'react-redux';
+import { removeNote, editNote } from '../actions';
 import { List, Item, Hr } from '../components';
+import { indigo500 } from 'material-ui/styles/colors';
 
 class ListContainer extends Component {
   onRemove(item) {
@@ -18,7 +19,7 @@ class ListContainer extends Component {
             return (
             <div key={index}>
               <Item onRemove={this.onRemove.bind(this)} onEdit={this.onEdit.bind(this)} item={item} />
-              {!!this.props.items[index + 1] && <Hr />}
+              {!!this.props.items[index + 1] && <Hr bgColor={indigo500} />}
             </div>
             )
           })

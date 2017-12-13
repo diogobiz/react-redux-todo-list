@@ -41,7 +41,7 @@ export default (state = initState, action) => {
           ...state.items,
           action.item
         ]
-      }      
+      }    
 
     case actionTypes.EDIT_NOTE:
       return {

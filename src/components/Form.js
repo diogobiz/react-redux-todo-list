@@ -31,7 +31,7 @@ const textareaField = ({
 }) => {
   return (
     <div>
-      <textarea {...input} placeholder={placeholder} rows={rows} className={className}></textarea><br />
+      <textarea {...input} placeholder={placeholder} rows={rows} className={className} style={{overflowX: 'hidden'}}></textarea><br />
       {touched &&
         ((error && <span className="input-error"><b>{error}</b></span>) ||
           (warning && <span className="input-warning"><b>{warning}</b></span>))}

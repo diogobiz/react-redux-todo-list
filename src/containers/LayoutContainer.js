@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
 import FormContainer from '../containers/FormContainer';
 import ListContainer from '../containers/ListContainer';
-import Scrollbar from './Scrollbar';
-import DrawerHeader from './DrawerHeader';
+import SnackBarContainer from '../containers/SnackBarContainer';
+import Scrollbar from '../components/Scrollbar';
+import DrawerHeader from '../components/DrawerHeader';
 import { indigo500 } from 'material-ui/styles/colors';
 import Drawer from 'material-ui/Drawer';
+import { ContentInbox, ActionGrade, ContentSend, ContentDrafts } from 'material-ui/svg-icons';
+import MenuItem from 'material-ui/MenuItem';
 
 const muiTheme = getMuiTheme({
   appBar: {
@@ -16,7 +20,7 @@ const muiTheme = getMuiTheme({
   },
 });
 
-class Layout extends Component {
+class LayoutContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {open: false};
@@ -31,22 +35,29 @@ class Layout extends Component {
     let listStyle = {
       width: '50%',
       marginTop: '23px'
-    }    
+    }
+
     return (
       <MuiThemeProvider muiTheme={muiTheme}>    
         <div style={{height: '100%'}}>        
-          <AppBar title="My App" onLeftIconButtonClick={this.handleToggle} />
+          <AppBar className={`app-bar ${(this.state.open ? 'expanded' : '')}`} title="My App" onLeftIconButtonClick={this.handleToggle} />
           <Drawer
-            docked={false}
+            docked={true}
             width={260}
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})}>
             <Scrollbar>
               <DrawerHeader />
+
+              <MenuItem  primaryText="Home" leftIcon={<ContentInbox />} />
+              <MenuItem  primaryText="Starred" leftIcon={<ActionGrade />} />
+              <MenuItem  primaryText="Sent mail" leftIcon={<ContentSend />} />
+              <MenuItem  primaryText="Drafts" leftIcon={<ContentDrafts />} />
+              <MenuItem  primaryText="Inbox" leftIcon={<ContentInbox />} />
             </Scrollbar>
           </Drawer>          
 
-          <div className="display-flex" style={{height: 'calc(100% - 50px)', overflow: 'auto'}}>
+          <div className={`content ${(this.state.open ? 'expanded' : '')}`}>
             <div style={formStyle}>
               <FormContainer />
             </div>
@@ -54,10 +65,18 @@ class Layout extends Component {
               <ListContainer />
             </div>
           </div>
+
+          <SnackBarContainer />
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    snackbar: state.notes.snackbar
+  }
+}
+
+export default connect(mapStateToProps)(LayoutContainer)

@@ -1,13 +1,9 @@
-import React from 'react'
-import muiThemeable from 'material-ui/styles/muiThemeable'
-import Avatar from 'material-ui/Avatar'
-import FontIcon from 'material-ui/FontIcon'
-import IconButton from 'material-ui/IconButton'
-import List from 'material-ui/List/List'
-import ListItem from 'material-ui/List/ListItem'
-import Paper from 'material-ui/Paper'
+import React from 'react';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import Avatar from 'material-ui/Avatar';
+import { List, ListItem } from 'material-ui/List';
+import Paper from 'material-ui/Paper';
 import PermIdentity from 'material-ui/svg-icons/action/perm-identity';
-import { darkBlack } from 'material-ui/styles/colors';
 
 const DrawerHeader = (props) => {
   const { muiTheme } = props

@@ -2,6 +2,21 @@ html {
   overflow: hidden;
 }
 
+.content {
+  height: calc(100% - 50px);
+  overflow: auto;
+  display: flex;
+  transition: margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.app-bar {
+  transition: margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.expanded {
+  margin-left: 260px
+}
+
 /* PADDINGS */
 .p-20 {
   padding: 20px;

@@ -20,8 +20,25 @@ export const editNote = item => {
 }
 
 export const removeNote = item => {
+  return (dispatch) => {
+    dispatch(showSnackBar(`DELETED ITEM ${item.title}!`))
+
+    dispatch({
+      type: actionsTypes.REMOVE_NOTE,
+      item: item
+    })
+  }
+}
+
+export const showSnackBar = message => {
   return {
-    type: actionsTypes.REMOVE_NOTE,
-    item: item
+    type: actionsTypes.SHOW_SNACKBAR,
+    message: message
+  }
+}
+
+export const hideSnackBar = () => {
+  return {
+    type: actionsTypes.HIDE_SNACKBAR,
   }
 }
