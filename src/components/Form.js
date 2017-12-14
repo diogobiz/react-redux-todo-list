@@ -3,39 +3,63 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import '../style.css';
 import { required, minLength5, alphaNumeric } from '../constants/validators.js';
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
+import RaisedButton from 'material-ui/RaisedButton';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import moment from 'moment';
 
-const inputField = ({
+const materialDatePicker = ({
+  input,
+  placeholder,
+  className,
+  meta: { touched, error, warning }
+}) => {
+  let value = input.value;
+  if (value !== "") {
+    
+    input.value = value.length === 10 ? moment(value, "DD/MM/YYYY").toDate() : moment(value).toDate();
+  } else {
+    input.value = {};
+  }
+  return (
+    <DatePicker
+      {...input}
+      errorText={touched && (error && error)}
+      hintText={placeholder}
+      container="inline"
+      className={className}
+      formatDate={(e) => e.toLocaleDateString()}
+      okLabel="Hora do show poha"
+      cancelLabel="Que não vai dar o que"
+      onChange={(event, value) => input.onChange(value)}
+    />
+  )
+}
+
+const materialInput = ({
   input,
   autocomplete,
   placeholder,
   type,
   className,
+  multiLine = false,
+  rows = 1,
+  muiTheme,
   meta: { touched, error, warning }
 }) => {
   return (
-    <div>
-      <input {...input} autoComplete={autocomplete} placeholder={placeholder} type={type} className={className}/><br />
-      {touched &&
-        ((error && <span className="input-error"><b>{error}</b></span>) ||
-          (warning && <span className="input-warning"><b>{warning}</b></span>))}
-    </div>
-  )
-}
-
-const textareaField = ({
-  input,
-  placeholder,
-  className,
-  rows,
-  meta: { touched, error, warning }
-}) => {
-  return (
-    <div>
-      <textarea {...input} placeholder={placeholder} rows={rows} className={className} style={{overflowX: 'hidden'}}></textarea><br />
-      {touched &&
-        ((error && <span className="input-error"><b>{error}</b></span>) ||
-          (warning && <span className="input-warning"><b>{warning}</b></span>))}
-    </div>
+    <TextField
+      {...input}
+      errorText={touched && (error && error)}
+      floatingLabelText={placeholder}
+      floatingLabelFocusStyle={{color: muiTheme.appBar.color}}
+      underlineFocusStyle={{borderColor: muiTheme.appBar.color}}
+      multiLine={multiLine}
+      rows={rows}
+      className={className}
+      fullWidth={true}   
+    />
   )
 }
 
@@ -44,45 +68,49 @@ class Form extends Component {
     this.props.handleSubmit(e, null, this.props.initialValues);
     this.props.reset()
   }
+
   render() {
     return (
       <form className="p-20" onSubmit={(e) => this.onSubmit(e)}>
-        <div className="form-group">
-          <label>Title</label>
-          <div>
+        <div className="row">
+          <div className="col-md-8">
             <Field
-              className="form-control"
               name="title"
-              component={inputField}
-              type="text"
-              autocomplete="off"
+              component={materialInput}
               validate={[required, minLength5]}
               warn={alphaNumeric}
-              placeholder="Title.."
+              placeholder="Title"
+              muiTheme={this.props.muiTheme}
             />
           </div>
-        </div>
+          <div className="col-md-4">
+            <Field
+              name="date"
+              id="date"
+              component={materialDatePicker}
+              validate={[required]}
+              placeholder="Date"
+              className="m-date-picker"    
+            />
+          </div>          
+        </div>  
+
         <div className="form-group">
-          <label>Description</label>
           <div>
             <Field
-              className="form-control no-resize"
               name="description"
-              component={textareaField}
-              rows="4"
+              component={materialInput}
               validate={[required, minLength5]}
-              warn={alphaNumeric}              
-              placeholder="Description..."
-            />
+              placeholder="Description"
+              multiLine={true}
+              rows={4}
+              muiTheme={this.props.muiTheme}
+            />                 
           </div>
         </div>
         <div>
-          <button type="submit" className="btn btn-primary m-r-20" disabled={this.props.pristine || this.props.submitting}>
-            Save
-          </button>
-          <button type="button" className="btn btn-default" disabled={this.props.pristine || this.props.submitting} onClick={this.props.reset}>
-            Clear
-          </button>
+          <RaisedButton type="submit" backgroundColor={this.props.muiTheme.appBar.color} labelColor="#FFF" className="m-r-20" label="Save" disabled={this.props.pristine || this.props.submitting || this.props.invalid} />
+          <RaisedButton onClick={this.props.reset} label="Clear" disabled={this.props.pristine || this.props.submitting} />
         </div>
       </form>
     )
@@ -95,8 +123,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(reduxForm({
-  form: 'formNote',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true
-})(Form))
+export default connect(mapStateToProps)
+                      (muiThemeable()(reduxForm({
+                        form: 'formNote',
+                        enableReinitialize: true,
+                        keepDirtyOnReinitialize: true
+                      })
+                        (Form)))

@@ -11,7 +11,7 @@ class FormContainer extends Component {
         note = {
           title: title,
           description: description,
-          date: new Date().toLocaleDateString(),
+          date: date.toLocaleDateString(),
           id: id
         };
       } else {

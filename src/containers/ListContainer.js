@@ -24,7 +24,7 @@ class ListContainer extends Component {
             )
           })
           :
-          <li className="text-center"><h2>Insert New Note...</h2></li>
+          <li className="text-center" style={{color: 'rgba(0, 0, 0, 0.3)'}}><h2>Insert new note...</h2></li>
         }
       </List>
     )

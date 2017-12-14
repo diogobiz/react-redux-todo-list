@@ -52,11 +52,13 @@ class LayoutContainer extends Component {
               </Scrollbar>
             </Drawer>
 
-            <Route exact path="/" component={Home} />       
-            <Route exact path="/starred" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Não tem nada aqui!</h3>} />
-            <Route exact path="/sent-mail" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Nem aqui!</h3>} />
-            <Route exact path="/drafts" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Nem aqui!</h3>} />
-            <Route exact path="/inbox" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Aqui também não</h3>} />
+            <div className={`main ${(this.state.open ? 'expanded' : '')}`}>
+              <Route exact path="/" component={Home} />       
+              <Route exact path="/starred" render={() => <h3 className={'content'}>Não tem nada aqui!</h3>} />
+              <Route exact path="/sent-mail" render={() => <h3 className={'content'}>Nem aqui!</h3>} />
+              <Route exact path="/drafts" render={() => <h3 className={'content'}>Nem aqui!</h3>} />
+              <Route exact path="/inbox" render={() => <h3 className={'content'}>Aqui também não</h3>} />
+            </div>
 
             <SnackBarContainer />
           </div>
