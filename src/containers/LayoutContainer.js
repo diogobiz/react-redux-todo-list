@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
-import FormContainer from '../containers/FormContainer';
-import ListContainer from '../containers/ListContainer';
 import SnackBarContainer from '../containers/SnackBarContainer';
 import Scrollbar from '../components/Scrollbar';
+import Home from '../components/Home';
 import DrawerHeader from '../components/DrawerHeader';
 import { indigo500 } from 'material-ui/styles/colors';
 import Drawer from 'material-ui/Drawer';
 import { ContentInbox, ActionGrade, ContentSend, ContentDrafts } from 'material-ui/svg-icons';
 import MenuItem from 'material-ui/MenuItem';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const muiTheme = getMuiTheme({
   appBar: {
@@ -29,45 +29,38 @@ class LayoutContainer extends Component {
   handleToggle = () => this.setState({open: !this.state.open});
 
   render() {
-    let formStyle = {
-      width: '50%'
-    }
-    let listStyle = {
-      width: '50%',
-      marginTop: '23px'
-    }
-
     return (
       <MuiThemeProvider muiTheme={muiTheme}>    
-        <div style={{height: '100%'}}>        
-          <AppBar className={`app-bar ${(this.state.open ? 'expanded' : '')}`} title="My App" onLeftIconButtonClick={this.handleToggle} />
-          <Drawer
-            docked={true}
-            width={260}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}>
-            <Scrollbar>
-              <DrawerHeader />
+        <Router>
+          <div style={{height: '100%'}}>
+            <AppBar className={`app-bar ${(this.state.open ? 'expanded' : '')}`} title={<Link to="/" style={{color: 'inherit'}}>My App</Link>} onLeftIconButtonClick={this.handleToggle} />
 
-              <MenuItem  primaryText="Home" leftIcon={<ContentInbox />} />
-              <MenuItem  primaryText="Starred" leftIcon={<ActionGrade />} />
-              <MenuItem  primaryText="Sent mail" leftIcon={<ContentSend />} />
-              <MenuItem  primaryText="Drafts" leftIcon={<ContentDrafts />} />
-              <MenuItem  primaryText="Inbox" leftIcon={<ContentInbox />} />
-            </Scrollbar>
-          </Drawer>          
+            <Drawer
+              docked={true}
+              width={260}
+              open={this.state.open}
+              onRequestChange={(open) => this.setState({open})}>
+              <Scrollbar>
+                <DrawerHeader />
+                <div>
+                  <Link to="/"><MenuItem  primaryText="Home" leftIcon={<ContentInbox />} /></Link>
+                  <Link to="/starred"><MenuItem  primaryText="Starred" leftIcon={<ActionGrade />} /></Link>
+                  <Link to="/sent-mail"><MenuItem  primaryText="Sent mail" leftIcon={<ContentSend />} /></Link>
+                  <Link to="/drafts"><MenuItem  primaryText="Drafts" leftIcon={<ContentDrafts />} /></Link>
+                  <Link to="/inbox"><MenuItem  primaryText="Inbox" leftIcon={<ContentInbox />} /></Link>
+                </div>
+              </Scrollbar>
+            </Drawer>
 
-          <div className={`content ${(this.state.open ? 'expanded' : '')}`}>
-            <div style={formStyle}>
-              <FormContainer />
-            </div>
-            <div className="p-20" style={listStyle}>
-              <ListContainer />
-            </div>
+            <Route exact path="/" component={Home} />       
+            <Route exact path="/starred" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Não tem nada aqui!</h3>} />
+            <Route exact path="/sent-mail" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Nem aqui!</h3>} />
+            <Route exact path="/drafts" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Nem aqui!</h3>} />
+            <Route exact path="/inbox" render={() => <h3 className={`content ${(this.state.open ? 'expanded' : '')}`}>Aqui também não</h3>} />
+
+            <SnackBarContainer />
           </div>
-
-          <SnackBarContainer />
-        </div>
+        </Router>
       </MuiThemeProvider>
     )
   }
