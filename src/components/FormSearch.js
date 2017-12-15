@@ -55,7 +55,7 @@ class FormSearch extends Component {
           </div>
           <div className="col-md-1 m-t-30">
             <RaisedButton
-              onClick={this.props.onClear}
+              onClick={() => { this.props.onClear(); this.props.reset(); }}
               icon={<ContentClear />}
               disabled={this.props.submitting} />
           </div>          
