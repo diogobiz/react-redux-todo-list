@@ -58,6 +58,10 @@ a:hover {
   margin-bottom: 20px;
 }
 
+.m-t-30 {
+  margin-top: 30px;
+}
+
 .no-resize {
   resize: none;
 }

@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
 import notes from './notes';
 import snackbar from './snackbar';
+import search from './search';
 
 export const getComposeEnhancers = (NODE_ENV) => (NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose
 
@@ -11,6 +12,7 @@ const composeEnhancers = getComposeEnhancers(process.env.NODE_ENV)
 const allReducers = combineReducers({
   notes,
   snackbar,
+  search,
   form: formReducer
 })
 

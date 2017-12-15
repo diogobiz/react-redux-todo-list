@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
-import SnackBarContainer from '../containers/SnackBarContainer';
+import { SnackBarContainer } from './';
 import Scrollbar from '../components/Scrollbar';
-import Home from '../components/Home';
+import { Home, Search } from '../components';
 import DrawerHeader from '../components/DrawerHeader';
 import { indigo500 } from 'material-ui/styles/colors';
 import Drawer from 'material-ui/Drawer';
@@ -44,7 +44,7 @@ class LayoutContainer extends Component {
                 <DrawerHeader />
                 <div>
                   <Link to="/"><MenuItem  primaryText="Home" leftIcon={<ContentInbox />} /></Link>
-                  <Link to="/starred"><MenuItem  primaryText="Starred" leftIcon={<ActionGrade />} /></Link>
+                  <Link to="/hora-do-show-pohaa"><MenuItem  primaryText="Hora do show pohaa!" leftIcon={<ActionGrade />} /></Link>
                   <Link to="/sent-mail"><MenuItem  primaryText="Sent mail" leftIcon={<ContentSend />} /></Link>
                   <Link to="/drafts"><MenuItem  primaryText="Drafts" leftIcon={<ContentDrafts />} /></Link>
                   <Link to="/inbox"><MenuItem  primaryText="Inbox" leftIcon={<ContentInbox />} /></Link>
@@ -54,7 +54,7 @@ class LayoutContainer extends Component {
 
             <div className={`main p-20 ${(this.state.open ? 'expanded' : '')}`}>
               <Route exact path="/" component={Home} />       
-              <Route exact path="/starred" render={() => <h3 className={'content'}>Não tem nada aqui!</h3>} />
+              <Route exact path="/hora-do-show-pohaa" component={Search} />
               <Route exact path="/sent-mail" render={() => <h3 className={'content'}>Nem aqui!</h3>} />
               <Route exact path="/drafts" render={() => <h3 className={'content'}>Nem aqui!</h3>} />
               <Route exact path="/inbox" render={() => <h3 className={'content'}>Aqui também não</h3>} />

@@ -1,4 +1,5 @@
-import * as actionsTypes from '../constants/actionsTypes'
+import * as actionsTypes from '../constants/actionsTypes';
+import axios from 'axios';
 
 let nextItemId = 1;
 export const addNote = item => {
@@ -27,6 +28,47 @@ export const removeNote = item => {
       type: actionsTypes.REMOVE_NOTE,
       item: item
     })
+  }
+}
+
+export const fetchUsers = (text) => {
+  return (dispatch) => {
+    dispatch(search(text))
+
+    axios.get(`https://api.github.com/search/users?q=${text}`)
+      .then((response) => {
+        dispatch(searchSuccess(response.data.items));
+      })
+      .catch((error) => {
+        dispatch(searchFailure(error));
+      })
+  }
+}
+
+export const search = (text) => {
+  return {
+    type: actionsTypes.SEARCH,
+    payload: text
+  }
+}
+
+export const searchSuccess = (data) => {
+  return {
+    type: actionsTypes.SEARCH_SUCCESS,
+    payload: data
+  }
+}
+
+export const searchFailure = (text) => {
+  return {
+    type: actionsTypes.SEARCH_FAILURE,
+    payload: text
+  }
+}
+
+export const searchClear = () => {
+  return {
+    type: actionsTypes.SEARCH_CLEAR
   }
 }
 
