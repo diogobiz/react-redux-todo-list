@@ -1,21 +1,13 @@
 import React from 'react';
 import { FormContainer, ListContainer } from '../containers';
 
-const Home = ({ meuExapanded }) => {
-  let formStyle = {
-    width: '50%'
-  }
-  let listStyle = {
-    width: '50%',
-    marginTop: '23px'
-  }
-  
+const Home = () => {  
   return (
-    <div className={`content ${(meuExapanded ? 'expanded' : '')}`}>
-      <div style={formStyle}>
+    <div className="row h-100">
+      <div className="col-md-6">
         <FormContainer />
       </div>
-      <div className="p-20" style={listStyle}>
+      <div className="col-md-6 h-100">
         <ListContainer />
       </div>
     </div>

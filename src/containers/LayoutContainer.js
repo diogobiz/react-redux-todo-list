@@ -52,7 +52,7 @@ class LayoutContainer extends Component {
               </Scrollbar>
             </Drawer>
 
-            <div className={`main ${(this.state.open ? 'expanded' : '')}`}>
+            <div className={`main p-20 ${(this.state.open ? 'expanded' : '')}`}>
               <Route exact path="/" component={Home} />       
               <Route exact path="/starred" render={() => <h3 className={'content'}>Não tem nada aqui!</h3>} />
               <Route exact path="/sent-mail" render={() => <h3 className={'content'}>Nem aqui!</h3>} />

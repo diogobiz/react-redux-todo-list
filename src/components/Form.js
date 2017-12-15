@@ -57,6 +57,7 @@ const materialInput = ({
       underlineFocusStyle={{borderColor: muiTheme.appBar.color}}
       multiLine={multiLine}
       rows={rows}
+      rowsMax={rows}
       className={className}
       fullWidth={true}   
     />
@@ -123,10 +124,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)
-                      (muiThemeable()(reduxForm({
-                        form: 'formNote',
-                        enableReinitialize: true,
-                        keepDirtyOnReinitialize: true
-                      })
-                        (Form)))
+const ReduxForm = reduxForm({form: 'formNote', enableReinitialize: true, keepDirtyOnReinitialize: true})(Form);
+const Theme = muiThemeable()(ReduxForm)
+
+export default connect(mapStateToProps)(Theme)
