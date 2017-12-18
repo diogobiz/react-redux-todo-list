@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const schema = require('../schemas/Character');
 
 //Import do graphqlHTTP que cria um servidor preparado pro GraphQL + HTTP
 const graphqlHTTP = require('express-graphql')
@@ -18,6 +19,7 @@ module.exports = () => {
     graphqlHTTP({
       schema,
       graphiql: true,
+      formatError: error => ({message: error.message, path: error.path})
     }) //Passando a instancia da função graphqlHTTP
   )
   

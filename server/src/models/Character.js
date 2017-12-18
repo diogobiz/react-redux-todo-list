@@ -8,6 +8,14 @@ class Character {
     this._dom = dom
   }
 
+  playerDoesntExists() {
+    const selector = `#characters > div.Border_2 > div > div > table > tbody > tr:nth-child(1) > td > b`;
+
+    const title = getTextContent(this._dom, selector);
+
+    return /not find/gi.test(title);
+  }
+
   get name(){
     const selector = `#characters > div.Border_2 > div > div > table:nth-child(1) > tbody > tr:nth-child(2) > td:nth-child(2)`;
     return getTextContent(this._dom, selector)

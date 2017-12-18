@@ -1,4 +1,6 @@
-const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql')
+const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql');
+
+const { getCharacterInfos } = require('../services/character.service');
 
 const CharacterType = new GraphQLObjectType({
   name: 'character',
@@ -56,21 +58,7 @@ module.exports = new GraphQLSchema({
             type: GraphQLString,
           },
         },
-        /* 
-          No resolve, estou mocando os dados só pra testar se as informações estão sendo passadas
-          para o CharacterType
-        */
-        resolve: (root, args) => ({
-          name: 'Hue Proliferator',
-          sex: 'male',
-          vocation: 'Elder Druid',
-          level: '123',
-          achievementPoints: '62',
-          world: 'Guardia',
-          residence: 'Thais',
-          lastLogin: 'Feb 19 2017, 01:03:29 CET',
-          accountStatus: 'Free Account',
-        }),
+        resolve: (root, args) => getCharacterInfos(args.nickname),
       },
     }),
   }),
