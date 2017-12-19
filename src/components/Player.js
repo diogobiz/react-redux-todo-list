@@ -11,15 +11,15 @@ const style = {
 
 const Player = ({ player }) => (
   <Paper style={style} zDepth={1}>
-    Name: {player.name} <br />
-    Account Status: {player.accountStatus} <br />
-    Achievement Points: {player.achievementPoints} <br />
-    Last Login: {player.lastLogin} <br />
-    Level: {player.level} <br />
-    Residence: {player.residence} <br />
-    Sex: {player.sex} <br />
-    Vocation: {player.vocation} <br />
-    World: {player.world} <br />
+    <b>Name:</b> {player.name} <br />
+    <b>Account Status:</b> {player.accountStatus} <br />
+    <b>Achievement Points:</b> {player.achievementPoints} <br />
+    <b>Last Login:</b> {player.lastLogin} <br />
+    <b>Level:</b> {player.level} <br />
+    <b>Residence:</b> {player.residence} <br />
+    <b>Sex:</b> {player.sex} <br />
+    <b>Vocation:</b> {player.vocation} <br />
+    <b>World:</b> {player.world} <br />
   </Paper>
 )
 

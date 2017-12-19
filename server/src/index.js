@@ -1,5 +1,5 @@
 //Importa a configuração criada e cria uma intancia do Express
-const app = require('./config/express.config.js')()
+const app = require('./config/express.config')()
 
 //Define uma porta padrão, caso não tenha alguma passada por variáveis de ambiente
 const port = process.env.PORT || 8080

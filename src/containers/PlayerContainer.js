@@ -26,12 +26,12 @@ const style = {
 const ExamplesPlayer = () => (
   <Paper style={style} zDepth={1}>
     <Subheader>Examples of nick names to search</Subheader>
-    Name: Hue Apocalipse <br />
-    Name: Kronek <br />
-    Name: Dremz <br />
-    Name: Hank Moodyy <br />
-    Name: Huguera <br />
-    Name: Ricanelaxz <br />
+    <b>Name:</b> Hue Apocalipse <br />
+    <b>Name:</b> Kronek <br />
+    <b>Name:</b> Dremz <br />
+    <b>Name:</b> Hank Moodyy <br />
+    <b>Name:</b> Huguera <br />
+    <b>Name:</b> Ricanelaxz <br />
   </Paper>
 )
 

@@ -29,6 +29,7 @@ const getCharacterInfos = (playerName = '') =>
         //Rejeita um error, passando a mensagem de player inexistente
         reject(new Error(`Player doesn't exists`))
       }
+
       //Caso contrário resolve (retorna) as informações do player
       resolve(character.allCharacterInformation)
     } catch (error) {
