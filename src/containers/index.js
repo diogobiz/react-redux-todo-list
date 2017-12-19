@@ -4,3 +4,4 @@ export { default as LayoutContainer } from './LayoutContainer';
 export { default as SnackBarContainer } from './SnackBarContainer';
 export { default as FormSearchContainer } from './FormSearchContainer';
 export { default as ListSearchContainer } from './ListSearchContainer';
+export { default as PlayerContainer } from './PlayerContainer';

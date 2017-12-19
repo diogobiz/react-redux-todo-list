@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
-import { SnackBarContainer } from './';
+import { SnackBarContainer, PlayerContainer } from './';
 import Scrollbar from '../components/Scrollbar';
 import { Home, Search } from '../components';
 import DrawerHeader from '../components/DrawerHeader';
@@ -12,7 +12,6 @@ import Drawer from 'material-ui/Drawer';
 import { ContentInbox, ActionGrade, ContentSend, ContentDrafts } from 'material-ui/svg-icons';
 import MenuItem from 'material-ui/MenuItem';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Player from './Player';
 
 const muiTheme = getMuiTheme({
   appBar: {
@@ -56,7 +55,7 @@ class LayoutContainer extends Component {
             <div className={`main p-20 ${(this.state.open ? 'expanded' : '')}`}>
               <Route exact path="/" component={Home} />       
               <Route exact path="/hora-do-show-pohaa" component={Search} />
-              <Route exact path="/tibia" component={Player} />
+              <Route exact path="/tibia" component={PlayerContainer} />
               <Route exact path="/drafts" render={() => <h3 className={'content'}>Nem aqui!</h3>} />
               <Route exact path="/inbox" render={() => <h3 className={'content'}>Aqui também não</h3>} />
             </div>
