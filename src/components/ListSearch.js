@@ -10,7 +10,6 @@ function wrapState(ComposedComponent) {
       this.setState({
         selectedIndex: this.props.defaultValue || 0,
       });
-      console.log(this.props)
     }
 
     handleRequestChange = (event, index) => {
