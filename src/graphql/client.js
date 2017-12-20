@@ -3,7 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:8080/player'
+  uri: 'http://localhost:8080/'
 })
 
 const inMemoryCache = new InMemoryCache().restore(window.__APOLLO_STATE__)

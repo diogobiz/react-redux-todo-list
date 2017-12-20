@@ -44,8 +44,8 @@ class LayoutContainer extends Component {
                 <DrawerHeader />
                 <div>
                   <Link to="/"><MenuItem  primaryText="Home" leftIcon={<ContentInbox />} /></Link>
-                  <Link to="/hora-do-show-pohaa"><MenuItem  primaryText="Hora do show pohaa!" leftIcon={<ActionGrade />} /></Link>
-                  <Link to="/tibia"><MenuItem  primaryText="Tibia" leftIcon={<ContentSend />} /></Link>
+                  <Link to="/search-users-github"><MenuItem  primaryText="Searh Users GitHub" leftIcon={<ActionGrade />} /></Link>
+                  <Link to="/search-player-tibia"><MenuItem  primaryText="Tibia" leftIcon={<ContentSend />} /></Link>
                   <Link to="/drafts"><MenuItem  primaryText="Drafts" leftIcon={<ContentDrafts />} /></Link>
                   <Link to="/inbox"><MenuItem  primaryText="Inbox" leftIcon={<ContentInbox />} /></Link>
                 </div>
@@ -54,8 +54,8 @@ class LayoutContainer extends Component {
 
             <div className={`main p-20 ${(this.state.open ? 'expanded' : '')}`}>
               <Route exact path="/" component={Home} />       
-              <Route exact path="/hora-do-show-pohaa" component={Search} />
-              <Route exact path="/tibia" component={PlayerContainer} />
+              <Route exact path="/search-users-github" component={Search} />
+              <Route exact path="/search-player-tibia" component={PlayerContainer} />
               <Route exact path="/drafts" render={() => <h3 className={'content'}>Nem aqui!</h3>} />
               <Route exact path="/inbox" render={() => <h3 className={'content'}>Aqui também não</h3>} />
             </div>
