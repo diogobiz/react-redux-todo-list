@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
-import { SnackBarContainer, PlayerContainer } from './';
+import { SnackBarContainer, PlayerContainer, ListSearchContainerGraphql } from './';
 import Scrollbar from '../components/Scrollbar';
 import { Home, Search } from '../components';
 import DrawerHeader from '../components/DrawerHeader';
@@ -46,7 +46,7 @@ class LayoutContainer extends Component {
                   <Link to="/"><MenuItem  primaryText="Home" leftIcon={<ContentInbox />} /></Link>
                   <Link to="/search-users-github"><MenuItem  primaryText="Searh Users GitHub" leftIcon={<ActionGrade />} /></Link>
                   <Link to="/search-player-tibia"><MenuItem  primaryText="Tibia" leftIcon={<ContentSend />} /></Link>
-                  <Link to="/drafts"><MenuItem  primaryText="Drafts" leftIcon={<ContentDrafts />} /></Link>
+                  <Link to="/drafts"><MenuItem  primaryText="Searh Users GitHub Graphql" leftIcon={<ContentDrafts />} /></Link>
                   <Link to="/inbox"><MenuItem  primaryText="Inbox" leftIcon={<ContentInbox />} /></Link>
                 </div>
               </Scrollbar>
@@ -56,7 +56,7 @@ class LayoutContainer extends Component {
               <Route exact path="/" component={Home} />       
               <Route exact path="/search-users-github" component={Search} />
               <Route exact path="/search-player-tibia" component={PlayerContainer} />
-              <Route exact path="/drafts" render={() => <h3 className={'content'}>Nem aqui!</h3>} />
+              <Route exact path="/drafts" component={ListSearchContainerGraphql} />
               <Route exact path="/inbox" render={() => <h3 className={'content'}>Aqui também não</h3>} />
             </div>
 

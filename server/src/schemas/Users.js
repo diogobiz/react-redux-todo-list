@@ -15,9 +15,13 @@ const UsersType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (root, args) => root.avatar_url
     },
+    url: {
+      type: GraphQLString,
+      resolve: (root, args) => root.html_url
+    },    
     repositories: {
       type: GraphQLList(RepositoriesType),
-      resolve: (root, args) => {console.log('b', root); return root.repositories}
+      resolve: (root, args) => root.repositories
     }       
   })
 })

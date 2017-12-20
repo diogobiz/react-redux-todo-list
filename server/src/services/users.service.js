@@ -7,7 +7,7 @@ const setRepositories = (users, respositories) => {
   if (!!users && users.length) {
     return users.map((user) => {
       if (!!respositories && respositories.length) {
-        user.repositories = respositories.map((repository) => ({name: repository.name}));
+        user.repositories = respositories.map((repository) => ({name: repository.full_name}));
       } else {
         user.repositories = null;
       }
