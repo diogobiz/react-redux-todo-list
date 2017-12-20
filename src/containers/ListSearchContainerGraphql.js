@@ -97,7 +97,7 @@ class ListSearchContainerGraphql extends Component {
             </ListSearch>
           </div>
           
-          <div className="col-md-4">
+          <div className="col-md-4" style={{height: '350px'}}>
             <ListRespositories user={this.state.selected} />
           </div>
         </div>
