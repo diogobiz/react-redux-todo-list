@@ -42,8 +42,7 @@ class PlayerContainer extends Component {
   }
 
   onSubmit = async ({search}) => {
-    await this.setState({searchText: search, loading: true});
-    this._executedSearch();
+    this.setState({searchText: search, loading: true}, () => this._executedSearch());
   }
 
   onClear = () => {
@@ -53,13 +52,19 @@ class PlayerContainer extends Component {
   _executedSearch = async () => {
     const { searchText } = this.state;
     try {
-      const result = await this.props.client.query({
+      this.props.client.query({
         query: player,
         variables: {
           nickname: searchText
         }
+      })
+      .then((response) => {
+        this.setState({
+          loading: false,
+          error: false,
+          player: response.data.player
+        });
       });
-      await this.setState({loading: false, error: false, player: result.data.player});
     } catch(error) {
       this.setState({loading: false, error: error.toString(), player: null});
     }

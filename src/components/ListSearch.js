@@ -9,13 +9,18 @@ function wrapState(ComposedComponent) {
     componentWillMount() {
       this.setState({
         selectedIndex: this.props.defaultValue || 0,
+      }, () => {
+        !!this.props.onTouchTap && this.props.onTouchTap(this.state.selectedIndex);
       });
     }
 
     handleRequestChange = (event, index) => {
       this.setState({
         selectedIndex: index,
+      }, () => {
+        !!this.props.onTouchTap && this.props.onTouchTap(this.state.selectedIndex);
       });
+      
     };
 
     render() {

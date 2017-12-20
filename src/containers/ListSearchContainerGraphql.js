@@ -7,14 +7,15 @@ import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 
 import CircularProgress from 'material-ui/CircularProgress';
-import { ListSearch, FormSearch } from '../components';
+import { ListSearch, FormSearch, ListRespositories } from '../components';
 
 const initState = {
   users: [],
   searchText: '',
   loading: false,
   error: '',
-  noResults: false
+  noResults: false,
+  selected: {}
 };
 
 class ListSearchContainerGraphql extends Component {
@@ -24,8 +25,7 @@ class ListSearchContainerGraphql extends Component {
   }
 
   onSubmit = async ({search}) => {
-    await this.setState({...initState, searchText: search, loading: true});
-    this._executedSearch();
+    this.setState({...initState, searchText: search, loading: true}, () => this._executedSearch());
   }
 
   onClear = () => {
@@ -35,20 +35,24 @@ class ListSearchContainerGraphql extends Component {
   _executedSearch = async () => {
     const { searchText } = this.state;
     try {
-      const result = await this.props.client.query({
+      this.props.client.query({
         query: users,
         variables: {
           username: searchText
         }
-      });
-      await this.setState({
-        loading: false,
-        error: false,
-        users: result.data.users,
-        noResults: !result.data.users.length ? true : false
+      })
+      .then((response) => {
+        this.setState({
+          loading: false,
+          error: false,
+          users: response.data.users,
+          noResults: !response.data.users.length ? true : false,
+          selected: response.data.users[0]
+        });
       });
     } catch(error) {
       this.setState({
+        ...initState,
         loading: false,
         error: error.toString(),
         player: [],
@@ -57,13 +61,17 @@ class ListSearchContainerGraphql extends Component {
     }
   };
 
+  onTouchTap = (index) => {
+    this.setState({selected: this.state.users[index]});
+  }
+
   render() {
     return(
       <div>
         <FormSearch onClear={this.onClear} onSubmit={this.onSubmit} />
         <div className="row">
-          <div className="col-md-9">
-            <ListSearch>
+          <div className="col-md-8">
+            <ListSearch onTouchTap={this.onTouchTap}>
               {(!!this.state.users.length &&
                 this.state.users.map((user, index) => {
                   return (
@@ -87,6 +95,10 @@ class ListSearchContainerGraphql extends Component {
                   <Subheader>Search for User of GitHub</Subheader>)            
                 }
             </ListSearch>
+          </div>
+          
+          <div className="col-md-4">
+            <ListRespositories user={this.state.selected} />
           </div>
         </div>
       </div>

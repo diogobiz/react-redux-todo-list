@@ -34,6 +34,10 @@ const RepositoriesType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
       resolve: (root, args) => root.name
+    },
+    url: {
+      type: GraphQLString,
+      resolve: (root, args) => root.url
     }    
   })
 })

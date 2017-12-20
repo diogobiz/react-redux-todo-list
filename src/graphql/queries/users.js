@@ -6,7 +6,8 @@ export default gql`
       username,
       img,
       repositories {
-        name
+        name,
+        url
       }
     }
   }
